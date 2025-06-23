@@ -1,9 +1,9 @@
-variable "Project" {
+variable "project" {
   type        = string
   description = "project name"
 }
 
-variable "Environment" {
+variable "environment" {
   type        = string
   description = "which environment project is running"
 }

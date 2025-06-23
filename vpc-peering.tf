@@ -10,7 +10,7 @@ resource "aws_vpc_peering_connection" "default" {
         var.peering_tags,
         local.common_tags,
         {
-            # Name = "${var.Project}-${var.Environment}-default"
+            # Name = "${var.project}-${var.environment}-default"
             Name = "${local.Name}-default"
         }
     )
@@ -32,7 +32,7 @@ resource "aws_route" "private_peering" {
     vpc_peering_connection_id       = aws_vpc_peering_connection.default[count.index].id
 }
 
-# adding routes of peering in databse route table
+# adding routes of peering in database route table
 resource "aws_route" "database-peering" {
     count                           = var.is_peering_required ? 1 : 0
     route_table_id                  = aws_route_table.database.id
