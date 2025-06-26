@@ -6,7 +6,8 @@ resource "aws_vpc" "this" {
         var.vpc_tags,
         local.common_tags,
         {
-            Name = "${var.Project}-${var.Environment}"
+            # Name = "${var.project}-${var.environment}"
+            Name = local.Name
         }
     )
 }
@@ -18,7 +19,8 @@ resource "aws_internet_gateway" "this" {
         var.igw_tags,
         local.common_tags,
         {
-            Name = "${var.Project}-${var.Environment}"
+            # Name = "${var.project}-${var.environment}"
+            Name = local.Name
         }
     )
 
@@ -35,7 +37,8 @@ resource "aws_subnet" "public" {
         var.public_subnet_tags,
         local.common_tags,
         {
-            Name = "${var.Project}-${var.Environment}-public-${local.az_names[count.index]}"
+            # Name = "${var.project}-${var.environment}-public-${local.az_names[count.index]}"
+            Name = "${local.Name}-public-${local.az_names[count.index]}"
         }
     )
 }
@@ -50,7 +53,8 @@ resource "aws_subnet" "private" {
         var.private_subnet_tags,
         local.common_tags,
         {
-            Name = "${var.Project}-${var.Environment}-private-${local.az_names[count.index]}"
+            # Name = "${var.project}-${var.environment}-private-${local.az_names[count.index]}"
+            Name = "${local.Name}-private-${local.az_names[count.index]}"
         }
     )
 
@@ -66,7 +70,8 @@ resource "aws_subnet" "database" {
         var.database_subnet_tags,
         local.common_tags,
         {
-            Name = "${var.Project}-${var.Environment}-database-${local.az_names[count.index]}"
+            # Name = "${var.project}-${var.environment}-database-${local.az_names[count.index]}"
+            Name = "${local.Name}-database-${local.az_names[count.index]}"
         }
     )
 
@@ -79,7 +84,9 @@ resource "aws_route_table" "public" {
         var.public_route_table_tags,
         local.common_tags,
         {
-            Name = "${var.Project}-${var.Environment}-public"
+            # Name = "${var.project}-${var.environment}-public"
+            Name = "${local.Name}-public"
+            
         }
     )
 }
@@ -91,7 +98,8 @@ resource "aws_route_table" "private" {
         var.private_route_table_tags,
         local.common_tags,
         {
-            Name = "${var.Project}-${var.Environment}-private"
+            # Name = "${var.project}-${var.environment}-private"
+            Name = "${local.Name}-private"
         }
     )
 }
@@ -103,7 +111,8 @@ resource "aws_route_table" "database" {
         var.database_route_table_tags,
         local.common_tags,
         {
-            Name = "${var.Project}-${var.Environment}-database"
+            # Name = "${var.project}-${var.environment}-database"
+            Name = "${local.Name}-database"
         }
     )
 }
@@ -143,7 +152,8 @@ resource "aws_nat_gateway" "main" {
         var.nat_gateway_tags,
         local.common_tags,
         {
-            Name = "${var.Project}-${var.Environment}"
+            # Name = "${var.project}-${var.environment}"
+            Name = local.Name
         }
     )
 }

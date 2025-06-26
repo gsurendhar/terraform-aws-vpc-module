@@ -1,9 +1,9 @@
-variable Project {
+variable "project" {
   type        = string
   description = "project name"
 }
 
-variable Environment {
+variable "environment" {
   type        = string
   description = "which environment project is running"
 }
@@ -14,62 +14,62 @@ variable  "cidr_block" {
   description = "description"
 }
 
-variable vpc_tags {
+variable "vpc_tags" {
   type        = map
   default     = {}
   description = "vpc tags if want specify"
 }
 
-variable igw_tags {
+variable "igw_tags" {
   type        = map
   default     = {}
   description = "internet gateway tags"
 }
  
-variable public_subnet_cidrs {
+variable "public_subnet_cidrs" {
    type        = list
    description = "cidr rang of public subnets can be provided here in list"
  }
  
-variable public_subnet_tags {
+variable "public_subnet_tags" {
    type        = map
    default     = {}
    description = "Public subnet tags"
  }
  
-variable private_subnet_cidrs {
+variable "private_subnet_cidrs" {
    type        = list
    description = "cidr rang of public subnets can be provided here in list"
  }
  
-variable private_subnet_tags {
+variable "private_subnet_tags" {
    type        = map
    default     = {}
    description = "private subnet tags"
  }
  
-variable database_subnet_cidrs {
+variable "database_subnet_cidrs" {
    type        = list
    description = "cidr rang of public subnets can be provided here in list"
  }
  
-variable database_subnet_tags {
+variable "database_subnet_tags" {
    type        = map
    default     = {}
    description = "database subnet tags"
  }
 
-variable public_route_table_tags {
+variable "public_route_table_tags" {
    type        = map
    default     = {}
 }
 
-variable private_route_table_tags {
+variable "private_route_table_tags" {
    type        = map
    default     = {}
 }
 
-variable database_route_table_tags {
+variable "database_route_table_tags" {
    type        = map
    default     = {}
 }
@@ -84,12 +84,12 @@ variable "nat_gateway_tags" {
    default     = {}
 }
 
-variable "is_peering_requried" {
+variable "is_peering_required" {
    type        = string
    default     = false
 }
 
-variable peering_tags {
+variable "peering_tags" {
    type        = map
    default     = {}
 }
