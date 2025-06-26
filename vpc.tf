@@ -139,15 +139,15 @@ resource "aws_route_table_association" "database" {
 
 # Elastic IP 
 resource "aws_eip" "nat" {
-    for_each = var.is_peering_required ? { "nat" = true } : {}
+    count    = var.is_peering_required ? 1 : 0
     domain   = "vpc"
 }
 
 # NAT Gateway
 resource "aws_nat_gateway" "main" {
-    for_each        = var.is_peering_required ? { "main" = true } : {}
-    allocation_id   = aws_eip.nat.id[each.key]
-    subnet_id       = aws_subnet.public[0].id
+    count           = var.is_peering_required ? 1 : 0
+    allocation_id   = aws_eip.nat[0].id
+    subnet_id       = aws_subnet.public[count.index].id
     tags = merge(
         var.nat_gateway_tags,
         local.common_tags,
@@ -170,7 +170,7 @@ resource "aws_route" "private" {
     count                   = var.is_peering_required ? 1 : 0
     route_table_id          = aws_route_table.private.id
     destination_cidr_block  = "0.0.0.0/0"
-    nat_gateway_id          = aws_nat_gateway.main.id
+    nat_gateway_id          = aws_nat_gateway.main[count.index].id
 }
 
 # adding NAt Gateway to database Routes 
@@ -178,6 +178,6 @@ resource "aws_route" "database" {
     count                   = var.is_peering_required ? 1 : 0
     route_table_id          = aws_route_table.database.id
     destination_cidr_block  = "0.0.0.0/0"
-    nat_gateway_id          = aws_nat_gateway.main.id
+    nat_gateway_id          = aws_nat_gateway.main[count.index].id
 }
 
