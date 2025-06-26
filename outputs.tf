@@ -35,7 +35,7 @@ output "database_subnet_id-1b" {
 }
 
 output "eip_ip" {
-  value = aws_eip.nat.public_ip
+  value = aws_eip.nat.public_ip[each.key]
 }
 
 output "nat_gateway_id" {

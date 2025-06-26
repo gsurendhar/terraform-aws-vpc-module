@@ -146,7 +146,7 @@ resource "aws_eip" "nat" {
 # NAT Gateway
 resource "aws_nat_gateway" "main" {
     for_each        = var.is_peering_required ? { "main" = true } : {}
-    allocation_id   = aws_eip.nat.id
+    allocation_id   = aws_eip.nat.id[each.key]
     subnet_id       = aws_subnet.public[0].id
     tags = merge(
         var.nat_gateway_tags,
