@@ -139,13 +139,13 @@ resource "aws_route_table_association" "database" {
 
 # Elastic IP 
 resource "aws_eip" "nat" {
-    count  = var.is_peering_required ? 1 : 0
-    domain = "vpc"
+    for_each = var.is_peering_required ? { "nat" = true } : {}
+    domain   = "vpc"
 }
 
 # NAT Gateway
 resource "aws_nat_gateway" "main" {
-    count           = var.iis_peering_required ? 1 : 0
+    for_each        = var.is_peering_required ? { "main" = true } : {}
     allocation_id   = aws_eip.nat.id
     subnet_id       = aws_subnet.public[0].id
     tags = merge(
