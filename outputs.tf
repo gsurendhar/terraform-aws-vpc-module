@@ -34,14 +34,6 @@ output "database_subnet_id-1b" {
   value       = aws_subnet.database[1].id
 }
 
-output "eip_ip" {
-  value = aws_eip.nat[0].public_ip
-}
-
-output "nat_gateway_id" {
-  value = aws_nat_gateway.main[0].id
-}
-
 output "public_route_table_id" {
   value = aws_route_table.public.id
 }
@@ -54,6 +46,14 @@ output "database_route_table_id" {
   value = aws_route_table.database.id
 }
 
-output "vpc_peering_id" {
-  value = aws_vpc_peering_connection.default[0].id
-}
+# output "vpc_peering_id" {
+#   value = aws_vpc_peering_connection.default[0].id
+# }
+
+# output "eip_ip" {
+#   value = aws_eip.nat[0].public_ip
+# }
+
+# output "nat_gateway_id" {
+#   value = aws_nat_gateway.main[0].id
+# }
